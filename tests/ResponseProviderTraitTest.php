@@ -31,19 +31,6 @@ use Http\Factory\Diactoros\{
 /** Package use block. */
 use Atan\Common\ResponseProviderTrait;
 
-class ResponseProviderMock
-{
-    use ResponseProvider;
-    
-    public function __construct(
-        StreamFactoryInterface $streamFactory = null,
-        ResponseFactoryInterface $responseFactory = null
-    ) {
-        $this->streamFactory = $streamFactory;
-        $this->responseFactory = $responseFactory;
-    }
-}
-
 class ResponseProviderTraitTest extends TestCase
 {
     private $responseProvider;
@@ -128,5 +115,18 @@ class ResponseProviderTraitTest extends TestCase
         $method = $class->getMethod($name);
         $method->setAccessible(true);
         return $method->invokeArgs($obj, $args);
+    }
+}
+
+class ResponseProviderMock
+{
+    use ResponseProvider;
+    
+    public function __construct(
+        StreamFactoryInterface $streamFactory = null,
+        ResponseFactoryInterface $responseFactory = null
+    ) {
+        $this->streamFactory = $streamFactory;
+        $this->responseFactory = $responseFactory;
     }
 }
